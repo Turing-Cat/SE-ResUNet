@@ -287,8 +287,7 @@ def run():
         prob=args.dropout_prob,
         channel_size=args.channel_size
     )
-
-    net = torch.load('/home/yusheng/code/new_grasp/logs/210222_2305_/epoch_02_iou_0.97')
+    #    net = torch.load('/home/yusheng/code/new_grasp/logs/210222_2305_/epoch_02_iou_0.97')
     
     net = net.to(device)
     logging.info('Done')

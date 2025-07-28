@@ -181,7 +181,7 @@ class GraspRectangles:
         if pad_to:
             if pad_to > len(self.grs):
                 a = np.concatenate((a, np.zeros((pad_to - len(self.grs), 4, 2))))
-        return a.astype(np.int)
+        return a.astype(int)
 
     @property
     def center(self):
@@ -190,7 +190,7 @@ class GraspRectangles:
         :return: float, mean centre of all GraspRectangles
         """
         points = [gr.points for gr in self.grs]
-        return np.mean(np.vstack(points), axis=0).astype(np.int)
+        return np.mean(np.vstack(points), axis=0).astype(int)
 
 
 class GraspRectangle:
@@ -225,7 +225,7 @@ class GraspRectangle:
         """
         :return: Rectangle center point
         """
-        return self.points.mean(axis=0).astype(np.int)
+        return self.points.mean(axis=0).astype(int)
 
     @property
     def length(self):
@@ -306,6 +306,7 @@ class GraspRectangle:
         :param angle: Angle to rotate (in radians)
         :param center: Point to rotate around (e.g. image center)
         """
+        angle = float(np.asarray(angle).item())
         R = np.array(
             [
                 [np.cos(-angle), np.sin(-angle)],
@@ -313,15 +314,21 @@ class GraspRectangle:
             ]
         )
         c = np.array(center).reshape((1, 2))
-        self.points = ((np.dot(R, (self.points - c).T)).T + c).astype(np.int)
+        self.points = ((np.dot(R, (self.points - c).T)).T + c).astype(int)
 
     def scale(self, factor):
         """
         :param factor: Scale grasp rectangle by factor
         """
-        if factor == 1.0:
-            return
-        self.points *= factor
+        factor = float(np.asarray(factor).item())
+        T = np.array(
+            [
+                [1 / factor, 0],
+                [0, 1 / factor]
+            ]
+        )
+        c = np.array(self.center).reshape((1, 2))
+        self.points = ((np.dot(T, (self.points - c).T)).T + c).astype(int)
 
     def plot(self, ax, color=None):
         """
@@ -338,6 +345,7 @@ class GraspRectangle:
         :param factor: Zoom factor
         :param center: Zoom zenter (focus point, e.g. image center)
         """
+        factor = float(np.asarray(factor).item())
         T = np.array(
             [
                 [1 / factor, 0],
@@ -345,7 +353,7 @@ class GraspRectangle:
             ]
         )
         c = np.array(center).reshape((1, 2))
-        self.points = ((np.dot(T, (self.points - c).T)).T + c).astype(np.int)
+        self.points = ((np.dot(T, (self.points - c).T)).T + c).astype(int)
 
 
 class Grasp:
@@ -380,7 +388,7 @@ class Grasp:
                 [y2 + self.width / 2 * xo, x2 + self.width / 2 * yo],
                 [y1 + self.width / 2 * xo, x1 + self.width / 2 * yo],
             ]
-        ).astype(np.float))
+        ).astype(float))
 
     def max_iou(self, grs):
         """

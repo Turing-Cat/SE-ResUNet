@@ -1,0 +1,84 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Project Specific
+# 预训练模型目录
+skgnet_pretrain/
+pretrained/
+
+# 数据集目录
+datasets/
+data/
+cornell/
+jacquard/
+
+# 模型检查点和权重
+*.pth
+*.pt
+*.ckpt
+*.weights
+checkpoints/
+runs/
+logs/
+
+# 输出和结果
+output/
+outputs/
+results/
+
+# 数据文件
+*.csv
+*.json
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+*.npz
+*.npy
+
+# 临时文件
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# 编译文件
+build/
+dist/
+*.manifest
+*.spec
+
+# 测试和覆盖率
+.coverage
+.pytest_cache/
+htmlcov/
+.tox/
+.coverage.*
+
+# Jupyter
+.ipynb_checkpoints/
+
+# 日志
+*.log
