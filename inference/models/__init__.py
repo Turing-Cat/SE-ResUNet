@@ -19,5 +19,8 @@ def get_network(network_name):
     elif network_name=='senet':
         from .senetgrasp import SEResUNet
         return SEResUNet
+    elif network_name == 'unet':
+        from .unet import UNet
+        return UNet
     else:
         raise NotImplementedError('Network {} is not implemented'.format(network_name))
