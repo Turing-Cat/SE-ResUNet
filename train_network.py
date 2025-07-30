@@ -25,7 +25,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Train network')
 
     # Network
-    parser.add_argument('--network', type=str, default='senet',
+    parser.add_argument('--network', type=str, default='grconvnet3',
                         help='Network name in inference/models')
     parser.add_argument('--use-depth', type=int, default=1,
                         help='Use Depth image for training (1/0)')
@@ -325,6 +325,7 @@ def run():
 
         # Log validation results to tensorbaord
         tb.add_scalar('loss/IOU', test_results['correct'] / (test_results['correct'] + test_results['failed']), epoch)
+        tb.add_scalar('loss/accuracy', test_results['correct'] / (test_results['correct'] + test_results['failed']), epoch)
         tb.add_scalar('loss/val_loss', test_results['loss'], epoch)
         for n, l in test_results['losses'].items():
             tb.add_scalar('val_loss/' + n, l, epoch)
